@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>List of Tickets</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #33FFE3;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    input[type="search"] {
+        width: 200px;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-right: 10px;
+    }
+    input[type="search"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+</style>
+
+</head>
+<body>
+		<h1>List of Tickets</h1>
+	
+	<table border="2" >
+		<form action="showticket">
+  			<label for="ticketTitle"></label>
+  			<input type="search" id="ticketTitle" >
+  			<label for="ticketShortDescription"></label>
+  			<input type="search" id="ticketShortDescription" >
+  			
+</form>
+		<form action="showticket" method="post">
+		<tr>
+			<th>Id</th>
+			<th>Ticket Title</th>
+			<th>Ticket Short Description</th>
+			<th>Ticket Created on</th>
+			<th>Actions</th>
+		</tr>
+		
+		<tr th:each="temp: ${ticket}">
+			<td th:text="${temp.id}"></td>
+			<td th:text="${temp.ticketTitle}"></td>
+			<td th:text="${temp.ticketShortDescription}"></td>
+			<td th:text="${temp.ticketCreated}"></td>
+			
+			<td> <a th:href="@{updateticketform(reg=${temp.id})}">Edit</a> </td>
+			<td> <a th:href="@{deleteticketform(reg=${temp.id})}">Delete</a></td>
+			<td> <a th:href="@{showticket(reg=${temp.id})}">View</a></td>
+			
+		</tr>
+		</form>
+	</table>
+		
+</body>
+</html>
